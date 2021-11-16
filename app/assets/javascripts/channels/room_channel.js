@@ -1,8 +1,7 @@
 $(function() {
   $('[data-channel-subscribe="room"]').each(function(index, element) {
     var $element = $(element),
-        room_id = $element.data('room-id')
-        messageTemplate = $('[data-role="message-template"]');
+        room_id = $element.data('room-id');
 
     $element.animate({ scrollTop: $element.prop("scrollHeight")}, 1000)
 
@@ -13,6 +12,11 @@ $(function() {
       },
       {
         received: function(data) {
+          var messageTemplate = messageTemplate = $('[data-role="from-them-template"]');
+          if (parseInt($('#user_id').val()) == data.user_id) {
+            messageTemplate = $('[data-role="from-me-template"]');
+          }
+
           var content = messageTemplate.children().clone(true, true);
           content.find('[data-role="user-avatar"]').attr('src', data.user_avatar_url);
           content.find('[data-role="message-text"]').text(data.message);

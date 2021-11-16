@@ -1,0 +1,41 @@
+<% is_my_message = message.user == current_user %>
+<div class="chat-message-container">
+  <div class="row no-gutters">
+    <!-- if message sent by current user, align right, blue bubble -->
+    <% if is_my_message %>
+      <div class="col">
+        <div class="from-me">
+          <p class="mb-1">
+          <%= message.message %>
+          </p>
+          <div class="text-right">
+            <small>
+              <%= message.created_at %>
+            </small>
+          </div>
+        </div>
+      </div>
+      <div class="col-auto text-center">
+        <img src="<%= message.user.gravatar_url %>" class="avatar" alt="">
+      </div>
+      <!-- if message sent by someone else, align left, orange bubble -->
+    <% else %>
+      <div class="col-auto text-center">
+        <img src="<%= message.user.gravatar_url %>" class="avatar" alt="">
+      </div>
+      <div class="col">
+        <div class="from-them">
+          <p class="mb-1">
+          <%= message.message %>
+          </p>
+
+          <div class="text-right">
+            <small>
+              <%= message.created_at %>
+            </small>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

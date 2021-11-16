@@ -11,6 +11,7 @@ class RoomsController < ApplicationController
   def show
     @room_message = RoomMessage.new room: @room
     @room_messages = @room.room_messages.includes(:user)
+    @user = current_user
   end
 
   def new
